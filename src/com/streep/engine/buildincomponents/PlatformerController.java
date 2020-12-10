@@ -1,10 +1,12 @@
 package com.streep.engine.buildincomponents;
 
-import com.streep.engine.systems.Component;
-import com.streep.engine.systems.Time;
+import com.streep.engine.core.Component;
+import com.streep.engine.util.Time;
 
 public class PlatformerController extends Component {
 
+	private static final long serialVersionUID = 1L;
+	
 	public float speed = 2f;
 	public float jumpStrength = 6f;
 	public PhysicsComponent physicsComponent = null;

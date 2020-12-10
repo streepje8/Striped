@@ -1,12 +1,13 @@
 package com.streep.engine.buildincomponents;
 
+import com.streep.engine.core.Component;
 import com.streep.engine.core.Game;
-import com.streep.engine.systems.Collider;
-import com.streep.engine.systems.Component;
-import com.streep.engine.systems.SMath;
-import com.streep.engine.systems.Time;
+import com.streep.engine.util.SMath;
+import com.streep.engine.util.Time;
 
 public class PhysicsComponent extends Component {
+	
+	private static final long serialVersionUID = 1L;
 
 	public float hVelocity = 0f;
 	public float vVelocity = 0f;

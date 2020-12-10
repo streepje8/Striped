@@ -1,11 +1,12 @@
 package com.streep.engine.buildincomponents;
 
 import com.streep.engine.core.Game;
-import com.streep.engine.systems.Collider;
-import com.streep.engine.systems.Vector2;
+import com.streep.engine.util.Vector2;
 
 public class CircleCollider extends Collider {
 
+	private static final long serialVersionUID = 1L;
+	
 	public float radius = 1f;
 	
 	@Override

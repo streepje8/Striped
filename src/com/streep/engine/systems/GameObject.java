@@ -3,6 +3,7 @@ package com.streep.engine.systems;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.streep.engine.core.Component;
 import com.streep.engine.subclasses.Sprite;
 
 public class GameObject implements Serializable {

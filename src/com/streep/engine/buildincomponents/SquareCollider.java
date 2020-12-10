@@ -1,11 +1,12 @@
 package com.streep.engine.buildincomponents;
 
 import com.streep.engine.core.Game;
-import com.streep.engine.systems.Collider;
-import com.streep.engine.systems.Vector2;
+import com.streep.engine.util.Vector2;
 
 public class SquareCollider extends Collider {
 
+	private static final long serialVersionUID = 1L;
+	
 	public float width = 1f;
 	public float height = 1f;
 	

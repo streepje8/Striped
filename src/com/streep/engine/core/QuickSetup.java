@@ -6,11 +6,10 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import com.streep.engine.systems.Component;
+import com.streep.engine.buildincomponents.SpriteRenderer;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.LevelManager;
-import com.streep.engine.systems.SpriteRenderer;
-import com.streep.engine.systems.Time;
+import com.streep.engine.util.Time;
 
 public class QuickSetup {
 
@@ -47,6 +46,9 @@ public class QuickSetup {
 		    	Time.DeltaTime = delta;
 		    	BufferedImage buffer = createBuffer(window);
 		    	Graphics g = buffer.getGraphics();
+		    	if(LevelManager.currentLevel.background != null) {
+		    		g.drawImage(LevelManager.currentLevel.background,0,0,buffer.getWidth(),buffer.getHeight(),null);
+		    	}
 		    	for(GameObject gameo : LevelManager.currentLevel.objects) {
 					for(Component comp : gameo.getComponents()) {
 						comp.update();

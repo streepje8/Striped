@@ -3,7 +3,9 @@ package com.streep.engine.systems;
 import java.util.ArrayList;
 
 import com.streep.engine.buildincomponents.CircleCollider;
+import com.streep.engine.buildincomponents.Collider;
 import com.streep.engine.buildincomponents.SquareCollider;
+import com.streep.engine.core.Component;
 
 public class ColliderManager {
 
