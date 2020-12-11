@@ -45,11 +45,11 @@ public class GameObject implements Serializable {
 		}
 	}
 	
-	public <T> Component getComponent(Class<T> componenttype) {
+	public <T> T getComponent(Class<T> componenttype) {
 		if(this.hasComponent(componenttype)) {
 			for(Component c : this.components) {
 				if(componenttype.isInstance(c)) {
-					return c;
+					return componenttype.cast(c);
 				}
 			}
 		}
@@ -68,5 +68,4 @@ public class GameObject implements Serializable {
 	public ArrayList<Component> getComponents() {
 		return this.components;
 	}
-	
 }

@@ -30,6 +30,7 @@ public class QuickSetup {
 	private static double delta = 0;
 	public static boolean EndLoop = false;
 	public static Color clearColor = Color.BLACK;
+	private static int skipticks = 30;
 	
 	public static void startWindow(JFrame window, WindowCode c) {
 		c.onStart();
@@ -43,23 +44,29 @@ public class QuickSetup {
 		    delta += (now - lastTime) / ns;
 		    lastTime = now;
 		    if(delta >= 1){
-		    	Time.DeltaTime = delta;
-		    	BufferedImage buffer = createBuffer(window);
-		    	Graphics g = buffer.getGraphics();
-		    	if(LevelManager.currentLevel.background != null) {
-		    		g.drawImage(LevelManager.currentLevel.background,0,0,buffer.getWidth(),buffer.getHeight(),null);
-		    	}
-		    	for(GameObject gameo : LevelManager.currentLevel.objects) {
-					for(Component comp : gameo.getComponents()) {
-						comp.update();
-						if(comp instanceof SpriteRenderer) {
-							SpriteRenderer sp = (SpriteRenderer) comp;
-							sp.renderSprite(gameo.x, gameo.y, g);
+		    	if(!(delta >= 5)) { //prevent the game from going to light speed after a lag spike
+		    		Time.DeltaTime = delta;
+			    	BufferedImage buffer = createBuffer(window);
+			    	Graphics g = buffer.getGraphics();
+			    	if(LevelManager.currentLevel.background != null) {
+			    		g.drawImage(LevelManager.currentLevel.background,0,0,buffer.getWidth(),buffer.getHeight(),null);
+			    	}
+			    	for(GameObject gameo : LevelManager.currentLevel.objects) {
+			    		if(skipticks < 0) {
+				    		for(Component comp : gameo.getComponents()) {
+									comp.update();
+									if(comp instanceof SpriteRenderer) {
+										SpriteRenderer sp = (SpriteRenderer) comp;
+										sp.renderSprite(gameo.x, gameo.y, g);
+									}
+							}
+			    		} else {
+							skipticks--;
 						}
-					}
+			    		c.update(buffer);
+				    	swapBuffer(window, buffer);
+			    	}
 				}
-		    	c.update(buffer);
-		    	swapBuffer(window, buffer);
 		    	delta--;
 		    }
 		}

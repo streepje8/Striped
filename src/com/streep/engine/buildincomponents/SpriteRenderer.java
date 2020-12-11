@@ -24,7 +24,7 @@ public class SpriteRenderer extends Component {
 
 	@Override
 	public void update() {
-		if(counter >= (60 * (1-speed))) {
+		if(counter >= (60 * (1/(60*this.speed)))) {
 			counter = 0;
 			frame++;
 			if(frame > (sprite.framecount - 1)) {

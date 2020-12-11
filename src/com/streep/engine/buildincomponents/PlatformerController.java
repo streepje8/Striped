@@ -9,12 +9,14 @@ public class PlatformerController extends Component {
 	
 	public float speed = 2f;
 	public float jumpStrength = 6f;
-	public PhysicsComponent physicsComponent = null;
+	private PhysicsComponent physicsComponent = null;
 	
 	@Override
 	public void start() {
 		if(gameObject.hasComponent(PhysicsComponent.class)) {
 			physicsComponent = (PhysicsComponent) gameObject.getComponent(PhysicsComponent.class);
+		} else {
+			System.out.println("[Warning] No physics component attached to " + gameObject.name + " but required by " + getClass().getName());
 		}
 	}
 

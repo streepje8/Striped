@@ -28,6 +28,7 @@ public class Main extends Game {
 		Resource playerspriteResource = new Resource("Sprite-0001.png");
 		Sprite playersprite = new Sprite(playerspriteResource, 32, 32, 1, 5, 0, 0, 0, 0);
 		GameObject player = new GameObject(400,200);
+		player.name = "Player";
 		
 		//add components
 		player.addComponent(new CircleCollider());
@@ -35,17 +36,19 @@ public class Main extends Game {
 		player.addComponent(new PhysicsComponent());
 		player.addComponent(new SpriteRenderer());
 		
+		
 		//configure components
-		((CircleCollider) (player.getComponent(CircleCollider.class))).radius = 32f;
-		SpriteRenderer sp = ((SpriteRenderer) player.getComponent(SpriteRenderer.class));
+		player.getComponent(CircleCollider.class).radius = 32f;
+		SpriteRenderer sp = player.getComponent(SpriteRenderer.class);
 		sp.sprite = playersprite;
 		sp.speed = 0.5f;
 		
 		//make the ground object
 		GameObject ground = new GameObject(0,300);
+		ground.name = "Ground";
 		ground.addComponent(new SquareCollider());
-		((SquareCollider) (ground.getComponent(SquareCollider.class))).width = 800f;
-		((SquareCollider) (ground.getComponent(SquareCollider.class))).height = 100f;
+		ground.getComponent(SquareCollider.class).width = 800f;
+		ground.getComponent(SquareCollider.class).height = 100f;
 		
 		//Create and open the level
 		Level l = new Level("LevelOne");

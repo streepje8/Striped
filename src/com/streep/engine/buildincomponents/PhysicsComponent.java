@@ -17,9 +17,9 @@ public class PhysicsComponent extends Component {
 	@Override
 	public void start() {
 		if(gameObject.hasComponent(Collider.class)) {
-			this.collider = (Collider) gameObject.getComponent(Collider.class);
+			this.collider = gameObject.getComponent(Collider.class);
 		} else {
-			System.out.println("[Warning] No collider attached to gameobject: " + gameObject.name);
+			System.out.println("[Warning] No collider attached to gameobject " + gameObject.name + " but physicscomponent requires it!");
 		}
 	}
 	

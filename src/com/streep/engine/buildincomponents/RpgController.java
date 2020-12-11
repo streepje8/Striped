@@ -8,23 +8,41 @@ public class RpgController extends Component {
 	private static final long serialVersionUID = 1L;
 	
 	public float speed = 2f;
+	private PhysicsComponent physicsComponent = null;
 	
 	@Override
-	public void start() {}
+	public void start() {
+		if(gameObject.hasComponent(PhysicsComponent.class)) {
+			setPhysicsComponent(gameObject.getComponent(PhysicsComponent.class));
+			physicsComponent.gravity = 0f;
+		} else {
+			System.out.println("[Warning] No physics component attached to " + gameObject.name + " but required by " + getClass().getName());
+		}
+	}
 
 	@Override
 	public void update() {
 		if(Input.getKeyDown('w')) {
-			gameObject.y -= speed * Time.DeltaTime;
-		}
-		if(Input.getKeyDown('a')) {
-			gameObject.x -= speed * Time.DeltaTime;
-		}
-		if(Input.getKeyDown('s')) {
-			gameObject.y += speed * Time.DeltaTime;
+			physicsComponent.vVelocity = (float) (-speed * Time.DeltaTime);
+		} else {
+			if(Input.getKeyDown('s')) {
+				physicsComponent.vVelocity = (float) (speed * Time.DeltaTime);
+			} else {
+				physicsComponent.vVelocity = 0f;
+			}
 		}
 		if(Input.getKeyDown('d')) {
-			gameObject.x += speed * Time.DeltaTime;
+			physicsComponent.hVelocity = (float) (speed * Time.DeltaTime);
+		} else {
+			if(Input.getKeyDown('a')) {
+				physicsComponent.hVelocity = (float) (-speed * Time.DeltaTime);
+			 } else {
+				 physicsComponent.hVelocity = 0f;
+			 }
 		}
+	}
+
+	public void setPhysicsComponent(PhysicsComponent physicsComponent) {
+		this.physicsComponent = physicsComponent;
 	}
 }
