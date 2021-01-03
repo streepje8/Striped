@@ -10,8 +10,9 @@ public class GameObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public int x;
-	public int y;
+	public float x;
+	public float y;
+	public float z;
 	public String name = "GameObject(no name set)";
 	
 	private ArrayList<Component> components = new ArrayList<Component>();
@@ -42,6 +43,12 @@ public class GameObject implements Serializable {
 			this.components.add(c);
 			c.setGameObject(this);
 			return true;
+		}
+	}
+	
+	public <T> void removeComponent(Class<T> componenttype) {
+		if(this.hasComponent(componenttype)) {
+			this.components.remove(this.getComponent(componenttype));
 		}
 	}
 	

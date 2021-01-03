@@ -18,6 +18,10 @@ public class Input implements MouseListener,KeyListener {
 	public static int vk_space = KeyEvent.VK_SPACE;
 	public static int vk_control = KeyEvent.VK_CONTROL;
 	
+	public void glPressed(int key) {
+		char c = (char) key;
+	}
+	
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}

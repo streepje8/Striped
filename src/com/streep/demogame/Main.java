@@ -2,13 +2,13 @@ package com.streep.demogame;
 
 import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
-
-import com.streep.engine.buildincomponents.CircleCollider;
-import com.streep.engine.buildincomponents.PhysicsComponent;
-import com.streep.engine.buildincomponents.PlatformerController;
-import com.streep.engine.buildincomponents.SpriteRenderer;
-import com.streep.engine.buildincomponents.SquareCollider;
+import com.streep.engine.GUI.Window;
+import com.streep.engine.GUI.Window.windowMode;
+import com.streep.engine.buildincomponents.colliders.CircleCollider;
+import com.streep.engine.buildincomponents.colliders.SquareCollider;
+import com.streep.engine.buildincomponents.controllers.PlatformerController;
+import com.streep.engine.buildincomponents.physics.PhysicsComponent;
+import com.streep.engine.buildincomponents.renderers.SpriteRenderer;
 import com.streep.engine.core.Game;
 import com.streep.engine.core.QuickSetup;
 import com.streep.engine.core.WindowCode;
@@ -22,7 +22,7 @@ public class Main extends Game {
 
 	public static void main(String[] args) {
 		//Create the game view
-		JFrame window = QuickSetup.window("DemoGame", 800, 400);
+		Window window = new Window(800,400,"DemoGame", windowMode.Win2D);
 		
 		//make the player object
 		Resource playerspriteResource = new Resource("Sprite-0001.png");
