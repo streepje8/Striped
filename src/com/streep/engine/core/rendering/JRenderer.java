@@ -14,6 +14,12 @@ public abstract class JRenderer extends Component {
 			RendererManager.jRenderers.add(this);
 		}
 	}
+	
+	public void deRegister() {
+		if(RendererManager.jRenderers.contains(this)) {
+			RendererManager.jRenderers.remove(this);
+		}
+	}
 
 	public abstract void onRender(BufferedImage buffer, Graphics g);
 	

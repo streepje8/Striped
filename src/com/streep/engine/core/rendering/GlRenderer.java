@@ -1,8 +1,5 @@
 package com.streep.engine.core.rendering;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-
 import com.streep.engine.core.Component;
 
 public abstract class GlRenderer extends Component {
@@ -14,7 +11,13 @@ public abstract class GlRenderer extends Component {
 			RendererManager.glRenderers.add(this);
 		}
 	}
+	
+	public void deRegister() {
+		if(RendererManager.glRenderers.contains(this)) {
+			RendererManager.glRenderers.remove(this);
+		}
+	}
 
-	public abstract void onRender(BufferedImage buffer, Graphics g);
+	public abstract void onRender();
 	
 }

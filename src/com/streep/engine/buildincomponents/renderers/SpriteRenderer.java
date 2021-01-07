@@ -23,6 +23,11 @@ public class SpriteRenderer extends JRenderer {
 		register();
 		this.frame = 0;
 	}
+	
+	@Override
+	public void destroy() {
+		deRegister();
+	}
 
 	@Override
 	public void update() {

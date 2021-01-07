@@ -1,21 +1,25 @@
 package com.streep.engine.GUI;
 
+import com.streep.engine.core.rendering.RendererBase;
+
 public class Window {
 	
-	public static enum windowMode {
-		Win2D,
-		Win3D
+	public static enum windowBackend {
+		JFrame,
+		OpenGL
 	}
 	
 	private BasisWindow window;
-	private windowMode mode = null;
+	private windowBackend mode = null;
+	public RendererBase renderer;
 	
-	public Window(int width, int height,String title ,windowMode w) {
-		this.mode = w;
-		if(w == windowMode.Win2D) {
+	public Window(int width, int height,String title ,windowBackend backend, RendererBase renderer) {
+		this.mode = backend;
+		this.renderer = renderer;
+		if(backend == windowBackend.JFrame) {
 			this.window = new JWindow(width, height, title);
 		}
-		if(w == windowMode.Win3D) {
+		if(backend == windowBackend.OpenGL) {
 			this.window = new GlWindow(width, height, title);
 		}
 	}
@@ -24,7 +28,7 @@ public class Window {
 		return window;
 	}
 
-	public windowMode getType() {
+	public windowBackend getBackend() {
 		return this.mode;
 	}
 	

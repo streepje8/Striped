@@ -1,17 +1,16 @@
 package com.streep.demogame;
 
-import java.awt.image.BufferedImage;
-
 import com.streep.engine.GUI.Window;
-import com.streep.engine.GUI.Window.windowMode;
+import com.streep.engine.GUI.Window.windowBackend;
 import com.streep.engine.buildincomponents.colliders.CircleCollider;
 import com.streep.engine.buildincomponents.colliders.SquareCollider;
 import com.streep.engine.buildincomponents.controllers.PlatformerController;
 import com.streep.engine.buildincomponents.physics.PhysicsComponent;
 import com.streep.engine.buildincomponents.renderers.SpriteRenderer;
 import com.streep.engine.core.Game;
-import com.streep.engine.core.QuickSetup;
+import com.streep.engine.core.Setup;
 import com.streep.engine.core.WindowCode;
+import com.streep.engine.core.rendering.Renderer3D;
 import com.streep.engine.subclasses.Resource;
 import com.streep.engine.subclasses.Sprite;
 import com.streep.engine.systems.GameObject;
@@ -22,7 +21,7 @@ public class Main extends Game {
 
 	public static void main(String[] args) {
 		//Create the game view
-		Window window = new Window(800,400,"DemoGame", windowMode.Win2D);
+		Window window = new Window(800,400,"DemoGame", windowBackend.OpenGL, new Renderer3D());
 		
 		//make the player object
 		Resource playerspriteResource = new Resource("Sprite-0001.png");
@@ -59,7 +58,7 @@ public class Main extends Game {
 		l.addObject(ground);
 		
 		//Start the game loop
-		QuickSetup.startWindow(window, new WindowCode() {
+		Setup.startWindow(window, new WindowCode() {
 			
 			@Override
 			public void onStart() {
@@ -67,7 +66,7 @@ public class Main extends Game {
 			}
 			
 			@Override
-			public void update(BufferedImage buffer) {
+			public void update() {
 				
 			}
 			

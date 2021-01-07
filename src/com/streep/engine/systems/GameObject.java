@@ -75,4 +75,13 @@ public class GameObject implements Serializable {
 	public ArrayList<Component> getComponents() {
 		return this.components;
 	}
+
+	public boolean removeComponent(Component c) {
+		if(this.components.contains(c)) {
+			c.destroy();
+			this.components.remove(c);
+			return true;
+		}
+		return false;
+	}
 }
