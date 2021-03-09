@@ -1,12 +1,8 @@
 package com.streep.engine.buildincomponents.renderers;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-
-import com.streep.engine.core.rendering.JRenderer;
 import com.streep.engine.subclasses.Sprite;
 
-public class SpriteRenderer extends JRenderer {
+public class SpriteRenderer {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,7 +13,7 @@ public class SpriteRenderer extends JRenderer {
 	private int counter = 0;
 	public Sprite sprite = null;
 	
-	
+	/*
 	@Override
 	public void start() {
 		register();
@@ -46,7 +42,7 @@ public class SpriteRenderer extends JRenderer {
 	public void onRender(BufferedImage buffer, Graphics g) {
 		g.drawImage(this.sprite.getFrame(frame), Math.round(gameObject.x), Math.round(gameObject.y), Math.round(this.sprite.getFrame(frame).getWidth() * xscale), Math.round(this.sprite.getFrame(frame).getHeight() * yscale), null);
 	}
-
+	*/
 	
 	
 }

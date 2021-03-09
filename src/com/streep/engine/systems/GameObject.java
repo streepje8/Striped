@@ -5,27 +5,32 @@ import java.util.ArrayList;
 
 import com.streep.engine.core.Component;
 import com.streep.engine.subclasses.Sprite;
+import com.streep.engine.util.Vector3;
 
 public class GameObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public float x;
-	public float y;
-	public float z;
+	public Vector3 position;
+	public Vector3 rotation;
 	public String name = "GameObject(no name set)";
 	
 	private ArrayList<Component> components = new ArrayList<Component>();
 	public Sprite sprite;
 	
 	public GameObject() {
-		this.x = 0;
-		this.y = 0;
+		this.position = Vector3.zero();
+		this.rotation = Vector3.zero();
 	}
 	
-	public GameObject(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public GameObject(float x, float y, float z) {
+		this.position = new Vector3(x,y,z);
+		this.rotation = Vector3.zero();
+	}
+	
+	public GameObject(Vector3 position) {
+		this.position = position;
+		this.rotation = Vector3.zero();
 	}
 	
 	public void Destory() {

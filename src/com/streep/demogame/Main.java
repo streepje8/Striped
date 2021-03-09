@@ -1,18 +1,12 @@
 package com.streep.demogame;
 
 import com.streep.engine.GUI.Window;
-import com.streep.engine.GUI.Window.windowBackend;
-import com.streep.engine.buildincomponents.colliders.CircleCollider;
-import com.streep.engine.buildincomponents.colliders.SquareCollider;
-import com.streep.engine.buildincomponents.controllers.PlatformerController;
-import com.streep.engine.buildincomponents.physics.PhysicsComponent;
-import com.streep.engine.buildincomponents.renderers.SpriteRenderer;
+import com.streep.engine.buildincomponents.renderers.MeshRenderer;
 import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
 import com.streep.engine.core.WindowCode;
-import com.streep.engine.core.rendering.Renderer3D;
-import com.streep.engine.subclasses.Resource;
-import com.streep.engine.subclasses.Sprite;
+import com.streep.engine.core.rendering.RendererGL;
+import com.streep.engine.elements.Mesh;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.Level;
 import com.streep.engine.systems.LevelManager;
@@ -21,41 +15,54 @@ public class Main extends Game {
 
 	public static void main(String[] args) {
 		//Create the game view
-		Window window = new Window(800,400,"DemoGame", windowBackend.OpenGL, new Renderer3D());
+		Window window = new Window(800,400,"DemoGame", new RendererGL());
+		float[] positions = {
+			    // VO
+			    -0.5f,  0.5f,  0.5f,
+			    // V1
+			    -0.5f, -0.5f,  0.5f,
+			    // V2
+			    0.5f, -0.5f,  0.5f,
+			    // V3
+			     0.5f,  0.5f,  0.5f,
+			    // V4
+			    -0.5f,  0.5f, -0.5f,
+			    // V5
+			     0.5f,  0.5f, -0.5f,
+			    // V6
+			    -0.5f, -0.5f, -0.5f,
+			    // V7
+			     0.5f, -0.5f, -0.5f,
+			};
+		int[] indices = {
+			    // Front face
+			    0, 1, 3, 3, 1, 2,
+			    // Top Face
+			    4, 0, 3, 5, 4, 3,
+			    // Right face
+			    3, 2, 7, 5, 3, 7,
+			    // Left face
+			    6, 1, 0, 6, 0, 4,
+			    // Bottom face
+			    2, 1, 6, 2, 6, 7,
+			    // Back face
+			    7, 6, 4, 7, 4, 5,
+			};
+		Mesh m = new Mesh(positions,indices);
+		GameObject Triangle = new GameObject();
+		MeshRenderer meshrend = new MeshRenderer();
+		meshrend.mesh = m;
+		Triangle.addComponent(meshrend);
 		
-		//make the player object
-		Resource playerspriteResource = new Resource("Sprite-0001.png");
-		Sprite playersprite = new Sprite(playerspriteResource, 32, 32, 1, 5, 0, 0, 0, 0);
-		GameObject player = new GameObject(400,200);
-		player.name = "Player";
-		
-		//add components
-		player.addComponent(new CircleCollider());
-		player.addComponent(new PlatformerController());
-		player.addComponent(new PhysicsComponent());
-		player.addComponent(new SpriteRenderer());
-		
-		
-		//configure components
-		player.getComponent(CircleCollider.class).radius = 32f;
-		SpriteRenderer sp = player.getComponent(SpriteRenderer.class);
-		sp.sprite = playersprite;
-		sp.speed = 0.5f;
-		
-		//make the ground object
-		GameObject ground = new GameObject(0,300);
-		ground.name = "Ground";
-		ground.addComponent(new SquareCollider());
-		ground.getComponent(SquareCollider.class).width = 800f;
-		ground.getComponent(SquareCollider.class).height = 100f;
+		//Resource playerspriteResource = new Resource("Sprite-0001.png");
+		//Sprite playersprite = new Sprite(playerspriteResource, 32, 32, 1, 5, 0, 0, 0, 0);
 		
 		//Create and open the level
 		Level l = new Level("LevelOne");
-		LevelManager.gotoLevel(l);
 		
-		//Add the objects
-		l.addObject(player);
-		l.addObject(ground);
+		l.addObject(Triangle);
+		
+		LevelManager.gotoLevel(l);
 		
 		//Start the game loop
 		Setup.startWindow(window, new WindowCode() {
@@ -67,7 +74,9 @@ public class Main extends Game {
 			
 			@Override
 			public void update() {
-				
+				Triangle.rotation.x += 1;
+				Triangle.rotation.y += 1;
+				Triangle.rotation.z += 1;
 			}
 			
 		});

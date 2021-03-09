@@ -34,9 +34,9 @@ public class PhysicsComponent extends Component {
 		if(collider != null) {
 			for(Collider c : Game.colliderManager.getColliders()) {
 				if(c != collider) {
-					if (collider.meeting(gameObject.x + hVelocity, gameObject.y, c)) { 
-					    while (!collider.meeting(gameObject.x + SMath.sign(hVelocity), gameObject.y, c)) {
-					        gameObject.x += SMath.sign(hVelocity); 
+					if (collider.meeting(gameObject.position.x + hVelocity, gameObject.position.y, c)) { 
+					    while (!collider.meeting(gameObject.position.x + SMath.sign(hVelocity), gameObject.position.y, c)) {
+					    	gameObject.position.x += SMath.sign(hVelocity); 
 					    }
 					    hVelocity = 0;
 					}
@@ -44,23 +44,23 @@ public class PhysicsComponent extends Component {
 			}
 			for(Collider c : Game.colliderManager.getColliders()) {
 				if(c != collider) {
-					if (collider.meeting(gameObject.x, gameObject.y + vVelocity, c)) { 
-					    while (!collider.meeting(gameObject.x, gameObject.y + SMath.sign(vVelocity), c)) { 
-					        gameObject.y += SMath.sign(vVelocity);
+					if (collider.meeting(gameObject.position.x, gameObject.position.y + vVelocity, c)) { 
+					    while (!collider.meeting(gameObject.position.x, gameObject.position.y + SMath.sign(vVelocity), c)) { 
+					    	gameObject.position.y += SMath.sign(vVelocity);
 					    } 
 					    vVelocity = 0;
 					}
 				}
 			}
 		}
-		gameObject.x += hVelocity;
-		gameObject.y += vVelocity;
+		gameObject.position.x += hVelocity;
+		gameObject.position.y += vVelocity;
 	}
 	
 	public boolean isGrounded() {
 		for(Collider c : Game.colliderManager.getColliders()) {
 			if(c != collider) {
-				if (collider.meeting(gameObject.x, gameObject.y + 1f, c)) { 
+				if (collider.meeting(gameObject.position.x, gameObject.position.y + 1f, c)) { 
 					return true;
 				}
 			}

@@ -34,6 +34,7 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 
 import com.streep.engine.core.Game;
@@ -42,8 +43,12 @@ import com.streep.engine.core.Setup;
 public class GlWindow extends BasisWindow{
 
 	private long window = 0; //openGL window
+	public int width = 800;
+	public int height = 400;
 	
 	public GlWindow(int width, int height, String title) {
+		this.width = width;
+		this.height = height;
 		System.out.println("Striped using LWJGL version " + Version.getVersion() + "!");
 		GLFWErrorCallback.createPrint(System.err).set();
 		if (!glfwInit())
@@ -64,7 +69,7 @@ public class GlWindow extends BasisWindow{
 				Game.Input.glPressed(key);
 		});
 
-		//Code opengl recommended
+		//Center the window
 		try (MemoryStack stack = stackPush()) {
 			IntBuffer pWidth = stack.mallocInt(1); // int*
 			IntBuffer pHeight = stack.mallocInt(1); // int*
@@ -81,7 +86,7 @@ public class GlWindow extends BasisWindow{
 		glfwMakeContextCurrent(getWindow());
 		glfwSwapInterval(1);
 		GL.createCapabilities();
-
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		// Set the clear color
 		glClearColor(Setup.clearColor.getRed(), Setup.clearColor.getGreen(), Setup.clearColor.getBlue(), 0.0f);
 	}

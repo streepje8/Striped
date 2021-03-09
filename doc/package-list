@@ -1,0 +1,12 @@
+com.streep.demogame
+com.streep.engine.GUI
+com.streep.engine.buildincomponents.colliders
+com.streep.engine.buildincomponents.controllers
+com.streep.engine.buildincomponents.physics
+com.streep.engine.buildincomponents.renderers
+com.streep.engine.core
+com.streep.engine.core.rendering
+com.streep.engine.handlers
+com.streep.engine.subclasses
+com.streep.engine.systems
+com.streep.engine.util

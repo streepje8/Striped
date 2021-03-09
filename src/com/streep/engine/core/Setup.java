@@ -35,7 +35,7 @@ public class Setup {
 		    if(delta >= 1){
 		    	if(!(delta >= 5)) { //prevent the game from going to light speed after a lag spike
 		    		Time.DeltaTime = delta;
-		    		window.renderer.onRenderImage(window);
+		    		window.renderer.preUpdate(window);
 		    		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			    		if(skipticks < 0) {
 				    		for(Component comp : gameo.getComponents()) {
@@ -46,6 +46,7 @@ public class Setup {
 						}
 			    	}
 		    		c.update();
+		    		window.renderer.onRenderImage(window);
 				}
 		    	delta--;
 		    }

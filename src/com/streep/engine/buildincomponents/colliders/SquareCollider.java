@@ -19,7 +19,7 @@ public class SquareCollider extends Collider {
 	public void update() {}
 
 	public Vector2 getLocation() {
-		return new Vector2(gameObject.x, gameObject.y);
+		return new Vector2(gameObject.position.x, gameObject.position.y);
 	}
 	
 	public boolean meeting(float x, float y, SquareCollider other) {

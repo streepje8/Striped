@@ -18,6 +18,6 @@ public abstract class GlRenderer extends Component {
 		}
 	}
 
-	public abstract void onRender();
+	public abstract void onRender(RendererGL rendererGL);
 	
 }
