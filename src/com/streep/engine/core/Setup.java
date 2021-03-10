@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import com.streep.engine.GUI.Window;
+import com.streep.engine.core.rendering.GLRenderer.VMemory;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.LevelManager;
 import com.streep.engine.util.Time;
@@ -51,6 +52,12 @@ public class Setup {
 		    	delta--;
 		    }
 		}
+		for(GameObject gameo : LevelManager.currentLevel.objects) {
+    		for(Component comp : gameo.getComponents()) {
+					comp.onGameEnd();
+			}
+    	}
+		VMemory.cleanUp();
 	}
 	
 	public static BufferedImage createBuffer(JFrame window) {

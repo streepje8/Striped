@@ -6,7 +6,11 @@ import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
 import com.streep.engine.core.WindowCode;
 import com.streep.engine.core.rendering.RendererGL;
+import com.streep.engine.core.rendering.GLRenderer.MaterialProperty;
+import com.streep.engine.core.rendering.GLRenderer.MaterialProperty.MaterialPropertyType;
+import com.streep.engine.elements.Material;
 import com.streep.engine.elements.Mesh;
+import com.streep.engine.elements.Texture;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.Level;
 import com.streep.engine.systems.LevelManager;
@@ -16,42 +20,23 @@ public class Main extends Game {
 	public static void main(String[] args) {
 		//Create the game view
 		Window window = new Window(800,400,"DemoGame", new RendererGL());
-		float[] positions = {
-			    // VO
-			    -0.5f,  0.5f,  0.5f,
-			    // V1
-			    -0.5f, -0.5f,  0.5f,
-			    // V2
-			    0.5f, -0.5f,  0.5f,
-			    // V3
-			     0.5f,  0.5f,  0.5f,
-			    // V4
-			    -0.5f,  0.5f, -0.5f,
-			    // V5
-			     0.5f,  0.5f, -0.5f,
-			    // V6
-			    -0.5f, -0.5f, -0.5f,
-			    // V7
-			     0.5f, -0.5f, -0.5f,
-			};
+		float[] vertices = {
+				-0.5f, 0.5f, 0f,//v0
+				-0.5f, -0.5f, 0f,//v1
+				0.5f, -0.5f, 0f,//v2
+				0.5f, 0.5f, 0f,//v3
+		};
 		int[] indices = {
-			    // Front face
-			    0, 1, 3, 3, 1, 2,
-			    // Top Face
-			    4, 0, 3, 5, 4, 3,
-			    // Right face
-			    3, 2, 7, 5, 3, 7,
-			    // Left face
-			    6, 1, 0, 6, 0, 4,
-			    // Bottom face
-			    2, 1, 6, 2, 6, 7,
-			    // Back face
-			    7, 6, 4, 7, 4, 5,
-			};
-		Mesh m = new Mesh(positions,indices);
+				0,1,3, //top left triangle (v0, v1, v3)
+				3,1,2 //bottom right triangle (v3, v1, v2)
+		};	
+		Mesh m = new Mesh(vertices,indices);
 		GameObject Triangle = new GameObject();
+		Material material = new Material("./Resources/DefaultAssets/defaultVertex.shader", "./Resources/DefaultAssets/defaultFragment.shader");
+		material.properties.add(new MaterialProperty("textureSampler", MaterialPropertyType.sampler2D, new Texture("./Resources/DefaultAssets/demoTexture.png")));
 		MeshRenderer meshrend = new MeshRenderer();
 		meshrend.mesh = m;
+		meshrend.material = material;
 		Triangle.addComponent(meshrend);
 		
 		//Resource playerspriteResource = new Resource("Sprite-0001.png");

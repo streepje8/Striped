@@ -11,8 +11,9 @@ public class GameObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Vector3 position;
-	public Vector3 rotation;
+	public Vector3 position = Vector3.zero();
+	public Vector3 rotation = Vector3.zero();
+	public Vector3 scale = Vector3.one();
 	public String name = "GameObject(no name set)";
 	
 	private ArrayList<Component> components = new ArrayList<Component>();
@@ -21,16 +22,19 @@ public class GameObject implements Serializable {
 	public GameObject() {
 		this.position = Vector3.zero();
 		this.rotation = Vector3.zero();
+		this.scale = Vector3.one();
 	}
 	
 	public GameObject(float x, float y, float z) {
 		this.position = new Vector3(x,y,z);
 		this.rotation = Vector3.zero();
+		this.scale = Vector3.one();
 	}
 	
 	public GameObject(Vector3 position) {
 		this.position = position;
 		this.rotation = Vector3.zero();
+		this.scale = Vector3.one();
 	}
 	
 	public void Destory() {
@@ -89,4 +93,21 @@ public class GameObject implements Serializable {
 		}
 		return false;
 	}
+	
+	public Vector3 getRotation() {
+		return rotation;
+	}
+
+	public void setRotation(Vector3 rotation) {
+		this.rotation = rotation;
+	}
+
+	public Vector3 getScale() {
+		return scale;
+	}
+
+	public void setScale(Vector3 scale) {
+		this.scale = scale;
+	}
+
 }

@@ -23,5 +23,7 @@ public abstract class Component implements Serializable {
 		this.gameObject = newGameObject;
 	}
 	
+	public void onGameEnd() {}
+	
 	public void destroy() {}
 }

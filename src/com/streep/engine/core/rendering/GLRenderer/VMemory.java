@@ -3,6 +3,7 @@ package com.streep.engine.core.rendering.GLRenderer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -10,12 +11,32 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import com.streep.engine.elements.Material;
 import com.streep.engine.elements.Mesh;
+import com.streep.engine.elements.Texture;
 
 public class VMemory {
 
 	private static List<Integer> vaos = new ArrayList<Integer>();
 	private static List<Integer> vbos = new ArrayList<Integer>();
+	public static HashMap<Integer, Texture> textures = new HashMap<Integer, Texture>();
+	
+	public static void saveTexture(Texture texture) {
+		texture.load();
+		textures.put(texture.ID, texture);
+	}
+	
+	public static void cleanUp() {
+		for(int vao : vaos) {
+			GL30.glDeleteVertexArrays(vao);
+		}
+		for(int vbo : vbos) {
+			GL15.glDeleteBuffers(vbo);
+		}
+		for(int key : textures.keySet()) {
+			GL15.glDeleteTextures(key);
+		}
+	}
 	
 	public static List<Integer> getVaos() {
 		return vaos;
@@ -31,10 +52,19 @@ public class VMemory {
 		return vao;
 	}
 	
-	public static RuntimeMesh storeMesh(Mesh m) {
+	public static RuntimeMesh storeMesh(Mesh m, Material material) {
 		int vao = createVAO();
 		GL30.glBindVertexArray(vao);
-		storeData(0,3,m.getPositions());
+		for(int key : material.attributes.keySet()) {
+			switch(material.attributes.get(key).type) {
+				case Posistion:
+					storeData(key,3,m.getPositions());
+					break;
+				case UV:
+					storeData(key,2,m.getUvs());
+					break;
+			}
+		}		
 		bindIndices(m.getIndices());
 		GL30.glBindVertexArray(0);
 		return new RuntimeMesh(vao,m.getIndices().length);

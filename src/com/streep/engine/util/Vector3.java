@@ -2,15 +2,13 @@ package com.streep.engine.util;
 
 import java.awt.Color;
 
+import org.lwjgl.util.vector.Vector3f;
+
 public class Vector3 {
 	
 	public float x;
 	public float y;
 	public float z;
-	
-	public static Vector3 zero() {
-		return new Vector3();
-	}
 	
 	public Vector3 Normalize() {
 		float magnitude = (float) Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
@@ -136,6 +134,18 @@ public class Vector3 {
 		result.setY(lightPos.getY() - p.getY());
 		result.setZ(lightPos.getZ() - p.getZ());
 		return result;
+	}
+
+	public Vector3f toVector3f() {
+		return new Vector3f(this.x, this.y, this.z);
+	}
+
+	public static Vector3 one() {
+		return new Vector3(1,1,1);
+	}
+	
+	public static Vector3 zero() {
+		return new Vector3();
 	}
 	
 }
