@@ -1,5 +1,8 @@
 package com.streep.engine.GUI;
 
-public class BasisWindow {
+public abstract class BasisWindow {
 
+	public abstract boolean getKey(int key);
+	public abstract boolean getKeyReleased(int key);
+	
 }

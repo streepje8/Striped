@@ -156,5 +156,9 @@ public class Vector3 {
 		result.z = matrix.m20 * this.x + matrix.m21 * this.y + matrix.m22 * this.z + matrix.m23;
 		return result;
 	}
+
+	public static Vector3 fromColor(Color color) {
+		return new Vector3(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
+	}
 	
 }

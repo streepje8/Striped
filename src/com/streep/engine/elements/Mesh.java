@@ -8,23 +8,28 @@ public class Mesh implements Serializable {
 
 	private float[] positions; 
 	private int[] indices;
-	private float[] Uvs;
+	private float[] uvs;
+	private float[] normals;
 	
 	public Mesh(float[] positions, int[] indices) {
 		this.positions = positions;
 		this.indices = indices;
-		this.Uvs = new float[] {
-			    0,0,
-			    0,1,
-			    1,1,
-			    1,0
-		};
+		this.uvs = new float[0];
+		this.normals = new float[0];
 	}
 	
 	public Mesh(float[] positions, int[] indices, float[] Uvs) {
 		this.positions = positions;
 		this.indices = indices;
-		this.Uvs = Uvs;
+		this.uvs = Uvs;
+		this.normals = new float[0];
+	}
+	
+	public Mesh(float[] positions, int[] indices, float[] Uvs, float[] Normals) {
+		this.positions = positions;
+		this.indices = indices;
+		this.uvs = Uvs;
+		this.normals = Normals;
 	}
 
 	public float[] getPositions() {
@@ -36,7 +41,11 @@ public class Mesh implements Serializable {
 	}
 
 	public float[] getUvs() {
-		return Uvs;
+		return uvs;
+	}
+
+	public float[] getNormals() {
+		return normals;
 	}
 	
 }

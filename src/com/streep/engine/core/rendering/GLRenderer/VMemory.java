@@ -63,6 +63,9 @@ public class VMemory {
 				case UV:
 					storeData(key,2,m.getUvs());
 					break;
+				case Normal:
+					storeData(key,3,m.getNormals());
+					break;
 			}
 		}		
 		bindIndices(m.getIndices());

@@ -1,7 +1,5 @@
 package com.streep.engine.handlers;
 
-import org.lwjgl.glfw.GLFW;
-
 import com.streep.engine.GUI.Window;
 
 public class Input {
@@ -122,12 +120,12 @@ public class Input {
 		this.window = window;
 	}
 
-	public boolean getKey(int c) {
-		return GLFW.glfwGetKey(window.getWindow().getWindow(), c) == GLFW.GLFW_PRESS;
+	public boolean getKey(int key) {
+		return this.window.getWindow().getKey(key);
 	}
 	
-	public boolean getKeyReleased(int c) {
-		return GLFW.glfwGetKey(window.getWindow().getWindow(), c) == GLFW.GLFW_RELEASE;
+	public boolean getKeyReleased(int key) {
+		return this.window.getWindow().getKeyReleased(key);
 	}
 	
 }

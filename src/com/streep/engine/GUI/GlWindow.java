@@ -31,17 +31,17 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 import java.nio.IntBuffer;
 
 import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 
-import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
 import com.streep.engine.util.Vector2;
 
-public class GlWindow extends BasisWindow{
+public class GlWindow extends BasisWindow {
 
 	private long window = 0; //openGL window
 	public int width = 800;
@@ -96,6 +96,7 @@ public class GlWindow extends BasisWindow{
 			IntBuffer pWidth = stack.mallocInt(1); // int*
 			IntBuffer pHeight = stack.mallocInt(1); // int*
 			glfwGetWindowSize(window, pWidth, pHeight);
+			GL11.glViewport(0, 0, pWidth.get(0), pHeight.get(0));
 			return new Vector2(pWidth.get(0), pHeight.get(0));
 		} catch(Exception e) {
 			return new Vector2(0,0);
@@ -113,6 +114,16 @@ public class GlWindow extends BasisWindow{
 
 	public long getWindow() {
 		return window;
+	}
+
+	@Override
+	public boolean getKey(int key) {
+		return GLFW.glfwGetKey(this.window, key) == GLFW.GLFW_PRESS;
+	}
+
+	@Override
+	public boolean getKeyReleased(int key) {
+		return GLFW.glfwGetKey(this.window, key) == GLFW.GLFW_RELEASE;
 	}
 
 }

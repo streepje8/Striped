@@ -5,7 +5,8 @@ public class MaterialAttribute {
 	public String name = "";
 	public static enum MaterialAttributeType {
 		Posistion,
-		UV
+		UV,
+		Normal
 	}
 	public MaterialAttributeType type;
 	

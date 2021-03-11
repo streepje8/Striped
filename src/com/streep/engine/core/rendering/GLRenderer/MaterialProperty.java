@@ -14,7 +14,9 @@ public class MaterialProperty implements Serializable {
 		Vector3,
 		Vector2,
 		Boolean,
-		Matrix
+		Matrix, 
+		LightData, 
+		MatrixData
 	}
 	
 	public MaterialPropertyType type;

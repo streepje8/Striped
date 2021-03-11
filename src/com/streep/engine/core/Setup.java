@@ -3,10 +3,13 @@ package com.streep.engine.core;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import com.streep.engine.GUI.Window;
+import com.streep.engine.buildincomponents.lights.Light;
 import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.core.rendering.GLRenderer.VMemory;
 import com.streep.engine.systems.GameObject;
@@ -40,19 +43,28 @@ public class Setup {
 		    		Time.DeltaTime = delta;
 		    		window.renderer.PreRender(window);
 		    		window.renderer.preUpdate(window);
+		    		List<Camera> renderList = new ArrayList<Camera>();
+		    		List<Light> lightList = new ArrayList<Light>();
 		    		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			    		if(skipticks < 0) {
 				    		for(Component comp : gameo.getComponents()) {
 									comp.update();
 									if(comp instanceof Camera) {
 										Camera cam = (Camera) comp;
-										window.renderer.RenderImage(cam, window);
+										renderList.add(cam);
+									}
+									if(comp instanceof Light) {
+										Light l = (Light) comp;
+										lightList.add(l);
 									}
 							}
 			    		} else {
 							skipticks--;
 						}
 			    	}
+		    		for(Camera cam : renderList) {
+		    			window.renderer.RenderImage(cam, lightList, window);
+		    		}
 		    		c.update();
 		    		window.renderer.PostRender(window);
 				}
