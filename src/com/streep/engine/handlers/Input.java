@@ -1,13 +1,13 @@
 package com.streep.engine.handlers;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.HashMap;
+import org.lwjgl.glfw.GLFW;
 
-public class Input implements MouseListener,KeyListener {
+import com.streep.engine.GUI.Window;
+
+public class Input {
 	
+	
+/*
 	private boolean mousedownL = false;
 	private boolean mousedownR = false;
 	private HashMap<Character, Boolean> keydownBC = new HashMap<Character, Boolean>();
@@ -114,7 +114,20 @@ public class Input implements MouseListener,KeyListener {
 		}
 		this.keydownCB.put(k, true);
 	}
+*/
 
+	private Window window;
 	
+	public void setMainWindow(Window window) {
+		this.window = window;
+	}
+
+	public boolean getKey(int c) {
+		return GLFW.glfwGetKey(window.getWindow().getWindow(), c) == GLFW.GLFW_PRESS;
+	}
+	
+	public boolean getKeyReleased(int c) {
+		return GLFW.glfwGetKey(window.getWindow().getWindow(), c) == GLFW.GLFW_RELEASE;
+	}
 	
 }

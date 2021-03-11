@@ -23,19 +23,19 @@ public class RpgController extends Component {
 
 	@Override
 	public void update() {
-		if(Input.getKeyDown('w')) {
+		if(Input.getKey('w')) {
 			physicsComponent.vVelocity = (float) (-speed * Time.DeltaTime);
 		} else {
-			if(Input.getKeyDown('s')) {
+			if(Input.getKey('s')) {
 				physicsComponent.vVelocity = (float) (speed * Time.DeltaTime);
 			} else {
 				physicsComponent.vVelocity = 0f;
 			}
 		}
-		if(Input.getKeyDown('d')) {
+		if(Input.getKey('d')) {
 			physicsComponent.hVelocity = (float) (speed * Time.DeltaTime);
 		} else {
-			if(Input.getKeyDown('a')) {
+			if(Input.getKey('a')) {
 				physicsComponent.hVelocity = (float) (-speed * Time.DeltaTime);
 			 } else {
 				 physicsComponent.hVelocity = 0f;

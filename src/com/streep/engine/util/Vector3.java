@@ -2,6 +2,7 @@ package com.streep.engine.util;
 
 import java.awt.Color;
 
+import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Vector3 {
@@ -66,35 +67,35 @@ public class Vector3 {
 		this.z = z;
 	}
 
-	public static Vector3 multiply(Vector3 dir, float dst) {
+	public Vector3 multiply(float val) {
 		Vector3 result = Vector3.zero();
-		result.setX(dir.getX() * dst);
-		result.setY(dir.getY() * dst);
-		result.setZ(dir.getZ() * dst);
+		result.setX(this.x * val);
+		result.setY(this.y * val);
+		result.setZ(this.z * val);
 		return result;
 	}
 
-	public static Vector3 add(Vector3 location, Vector3 multiply) {
+	public Vector3 add(Vector3 amount) {
 		Vector3 result = Vector3.zero();
-		result.setX(location.getX() + multiply.getX());
-		result.setY(location.getY() + multiply.getY());
-		result.setZ(location.getZ() + multiply.getZ());
+		result.setX(this.x + amount.x);
+		result.setY(this.y + amount.y);
+		result.setZ(this.z + amount.z);
 		return result;
 	}
 
-	public static Vector3 divide(Vector3 v, float number) {
+	public Vector3 divide(float number) {
 		Vector3 result = Vector3.zero();
-		result.setX(v.getX() / number);
-		result.setY(v.getY() / number);
-		result.setZ(v.getZ() / number);
+		result.setX(this.x / number);
+		result.setY(this.y / number);
+		result.setZ(this.z / number);
 		return result;
 	}
 
-	public static Vector3 multiply(Vector3 a, Vector3 b) {
+	public Vector3 multiply(Vector3 b) {
 		Vector3 result = Vector3.zero();
-		result.setX(a.getX() * b.getX());
-		result.setY(a.getY() * b.getY());
-		result.setZ(a.getZ() * b.getZ());
+		result.setX(this.x * b.getX());
+		result.setY(this.y * b.getY());
+		result.setZ(this.z * b.getZ());
 		return result;
 	}
 	
@@ -128,11 +129,11 @@ public class Vector3 {
 		}
 	}
 
-	public static Vector3 subtract(Vector3 lightPos, Vector3 p) {
+	public Vector3 subtract(Vector3 b) {
 		Vector3 result = Vector3.zero();
-		result.setX(lightPos.getX() - p.getX());
-		result.setY(lightPos.getY() - p.getY());
-		result.setZ(lightPos.getZ() - p.getZ());
+		result.setX(this.x - b.getX());
+		result.setY(this.y - b.getY());
+		result.setZ(this.z - b.getZ());
 		return result;
 	}
 
@@ -146,6 +147,14 @@ public class Vector3 {
 	
 	public static Vector3 zero() {
 		return new Vector3();
+	}
+
+	public Vector3 mulMatrix(Matrix4f matrix) {
+		Vector3 result = new Vector3(0,0,0);
+		result.x = matrix.m00 * this.x + matrix.m01 * this.y + matrix.m02 * this.z + matrix.m03;
+		result.y = matrix.m10 * this.x + matrix.m11 * this.y + matrix.m12 * this.z + matrix.m13;
+		result.z = matrix.m20 * this.x + matrix.m21 * this.y + matrix.m22 * this.z + matrix.m23;
+		return result;
 	}
 	
 }

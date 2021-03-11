@@ -39,6 +39,7 @@ import org.lwjgl.system.MemoryStack;
 
 import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
+import com.streep.engine.util.Vector2;
 
 public class GlWindow extends BasisWindow{
 
@@ -66,7 +67,6 @@ public class GlWindow extends BasisWindow{
 		glfwSetKeyCallback(getWindow(), (window, key, scancode, action, mods) -> {
 			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 				glfwSetWindowShouldClose(window, true);
-				Game.Input.glPressed(key);
 		});
 
 		//Center the window
@@ -91,7 +91,18 @@ public class GlWindow extends BasisWindow{
 		glClearColor(Setup.clearColor.getRed(), Setup.clearColor.getGreen(), Setup.clearColor.getBlue(), 0.0f);
 	}
 	
-	public void update() {
+	public static Vector2 getSize(long window) {
+		try (MemoryStack stack = stackPush()) {
+			IntBuffer pWidth = stack.mallocInt(1); // int*
+			IntBuffer pHeight = stack.mallocInt(1); // int*
+			glfwGetWindowSize(window, pWidth, pHeight);
+			return new Vector2(pWidth.get(0), pHeight.get(0));
+		} catch(Exception e) {
+			return new Vector2(0,0);
+		}
+	}
+	
+	public void clear() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 	

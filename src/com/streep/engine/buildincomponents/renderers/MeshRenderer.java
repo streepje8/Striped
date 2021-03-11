@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjglx.BufferUtils;
 
+import com.streep.engine.GUI.GlWindow;
 import com.streep.engine.core.rendering.GlRenderer;
 import com.streep.engine.core.rendering.RendererGL;
 import com.streep.engine.core.rendering.GLRenderer.MaterialProperty;
@@ -31,7 +32,7 @@ public class MeshRenderer extends GlRenderer {
 	private static FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 	
 	@Override
-	public void onRender(RendererGL renderer) {
+	public void onRender(Camera c, RendererGL renderer) {
 		this.material.start();
 		GL30.glBindVertexArray(runtimeMesh.getVao());
 		for(int i = 0; i < this.material.attributes.size(); i++) {
@@ -41,6 +42,12 @@ public class MeshRenderer extends GlRenderer {
 		for(MaterialProperty prop : this.material.properties) {
 			if(prop.name == "transformationMatrix") {
 				prop.value = SMath.createTransformationMatrix(this.gameObject.position,this.gameObject.rotation, this.gameObject.scale);
+			}
+			if(prop.name == "projectionMatrix") {
+				prop.value = c.getProjectionMatrix(GlWindow.getSize(renderer.getWindow().getWindow().getWindow()));
+			}
+			if(prop.name == "viewMatrix") {
+				prop.value = c.getViewMatrix();
 			}
 			switch(prop.type) {
 				case Float:

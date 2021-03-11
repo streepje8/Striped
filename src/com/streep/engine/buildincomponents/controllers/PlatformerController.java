@@ -23,15 +23,15 @@ public class PlatformerController extends Component {
 
 	@Override
 	public void update() {
-		if(Input.getKeyDown('w')) {
+		if(Input.getKey('w')) {
 			if(physicsComponent.isGrounded()) {
 				physicsComponent.vVelocity = (float) (-(jumpStrength) * Time.DeltaTime);
 			}
 		}
-		if(Input.getKeyDown('a')) {
+		if(Input.getKey('a')) {
 			physicsComponent.hVelocity = (float) (-speed * Time.DeltaTime);
 		} else {
-			if(Input.getKeyDown('d')) {
+			if(Input.getKey('d')) {
 				physicsComponent.hVelocity = (float) (speed * Time.DeltaTime);
 			} else {
 				physicsComponent.hVelocity = 0f;

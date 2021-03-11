@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import com.streep.engine.GUI.Window;
+import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.core.rendering.GLRenderer.VMemory;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.LevelManager;
@@ -24,6 +25,7 @@ public class Setup {
 	
 	public static void startWindow(Window window, WindowCode c) {
 		c.onStart();
+		Game.Input.setMainWindow(window);
 		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			for(Component comp : gameo.getComponents()) {
 				comp.start();
@@ -36,18 +38,23 @@ public class Setup {
 		    if(delta >= 1){
 		    	if(!(delta >= 5)) { //prevent the game from going to light speed after a lag spike
 		    		Time.DeltaTime = delta;
+		    		window.renderer.PreRender(window);
 		    		window.renderer.preUpdate(window);
 		    		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			    		if(skipticks < 0) {
 				    		for(Component comp : gameo.getComponents()) {
 									comp.update();
+									if(comp instanceof Camera) {
+										Camera cam = (Camera) comp;
+										window.renderer.RenderImage(cam, window);
+									}
 							}
 			    		} else {
 							skipticks--;
 						}
 			    	}
 		    		c.update();
-		    		window.renderer.onRenderImage(window);
+		    		window.renderer.PostRender(window);
 				}
 		    	delta--;
 		    }

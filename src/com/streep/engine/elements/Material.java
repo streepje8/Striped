@@ -38,6 +38,8 @@ public class Material implements Serializable {
 		attributes.put(0, new MaterialAttribute("position",MaterialAttributeType.Posistion));
 		attributes.put(1, new MaterialAttribute("uv",MaterialAttributeType.UV));
 		properties.add(new MaterialProperty("transformationMatrix", MaterialPropertyType.Matrix));
+		properties.add(new MaterialProperty("projectionMatrix", MaterialPropertyType.Matrix));
+		properties.add(new MaterialProperty("viewMatrix", MaterialPropertyType.Matrix));
 	}
 	
 	public void loadToMemory() {

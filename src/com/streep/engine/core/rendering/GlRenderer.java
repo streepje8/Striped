@@ -1,5 +1,6 @@
 package com.streep.engine.core.rendering;
 
+import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.core.Component;
 
 public abstract class GlRenderer extends Component {
@@ -18,6 +19,6 @@ public abstract class GlRenderer extends Component {
 		}
 	}
 
-	public abstract void onRender(RendererGL rendererGL);
+	public abstract void onRender(Camera c, RendererGL rendererGL);
 	
 }

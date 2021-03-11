@@ -3,8 +3,11 @@ package com.streep.engine.systems;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.lwjgl.util.vector.Matrix4f;
+
 import com.streep.engine.core.Component;
 import com.streep.engine.subclasses.Sprite;
+import com.streep.engine.util.SMath;
 import com.streep.engine.util.Vector3;
 
 public class GameObject implements Serializable {
@@ -35,6 +38,27 @@ public class GameObject implements Serializable {
 		this.position = position;
 		this.rotation = Vector3.zero();
 		this.scale = Vector3.one();
+	}
+	
+	public Vector3 forward() {
+		Vector3 forward = new Vector3(0,0,-1);
+		Matrix4f mat = SMath.createTransformationMatrix(new Vector3(0,0,0), this.rotation, new Vector3(1,1,1));
+		forward = forward.mulMatrix(mat);
+		return forward;
+	}
+	
+	public Vector3 left() {
+		Vector3 forward = new Vector3(-1,0,0);
+		Matrix4f mat = SMath.createTransformationMatrix(new Vector3(0,0,0), this.rotation, new Vector3(1,1,1));
+		forward = forward.mulMatrix(mat);
+		return forward;
+	}
+	
+	public Vector3 up() {
+		Vector3 forward = new Vector3(0,1,0);
+		Matrix4f mat = SMath.createTransformationMatrix(new Vector3(0,0,0), this.rotation, new Vector3(1,1,1));
+		forward = forward.mulMatrix(mat);
+		return forward;
 	}
 	
 	public void Destory() {
