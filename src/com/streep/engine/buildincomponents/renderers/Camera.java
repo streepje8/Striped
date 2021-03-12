@@ -14,6 +14,7 @@ public class Camera extends Component {
     public float FOV = 70;
     public float Z_NEAR = 0.01f;
     public float Z_FAR = 1000.f;
+    public boolean GUI_ENABLED = true;
 
 	@Override
 	public void start() {

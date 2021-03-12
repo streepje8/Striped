@@ -1,5 +1,7 @@
 package com.streep.engine.util;
 
+import org.lwjgl.util.vector.Vector2f;
+
 public class Vector2 {
 
 	public float x = 0;
@@ -20,6 +22,10 @@ public class Vector2 {
 	
 	public float distance(Vector2 other) {
 		return (float) Math.sqrt(Math.pow(other.x - this.x,2) + Math.pow(other.y - this.y,2));
+	}
+
+	public Vector2f toVector2f() {
+		return new Vector2f(this.x, this.y);
 	}
 	
 }

@@ -7,7 +7,7 @@ import com.streep.engine.core.Component;
 public class CameraDebugController extends Component {
 
 	private static final long serialVersionUID = 1L;
-	public float speed = 0.02f;
+	public float speed = 0.05f;
 	public float rotationSpeed = 1;
 	
 	@Override

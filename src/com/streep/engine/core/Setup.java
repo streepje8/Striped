@@ -28,6 +28,7 @@ public class Setup {
 	
 	public static void startWindow(Window window, WindowCode c) {
 		c.onStart();
+		VMemory.init();
 		Game.Input.setMainWindow(window);
 		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			for(Component comp : gameo.getComponents()) {

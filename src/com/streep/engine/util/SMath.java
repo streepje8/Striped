@@ -17,6 +17,16 @@ public class SMath {
 		}
 	}
 	
+	public static Matrix4f createTransformationMatrix(Vector2 translation, Vector2 rotation, Vector2 scale) {
+		Matrix4f matrix = new Matrix4f();
+		matrix.setIdentity();
+		Matrix4f.translate(translation.toVector2f(), matrix, matrix);
+		Matrix4f.rotate((float) Math.toRadians(rotation.x), new Vector3f(1,0,0), matrix, matrix);
+		Matrix4f.rotate((float) Math.toRadians(rotation.y), new Vector3f(0,1,0), matrix, matrix);
+		Matrix4f.scale(new Vector3f(scale.x,scale.y,1.0f), matrix, matrix);
+		return matrix;
+	}
+	
 	public static Matrix4f createTransformationMatrix(Vector3 translation, Vector3 rotation, Vector3 scale) {
 		Matrix4f matrix = new Matrix4f();
 		matrix.setIdentity();

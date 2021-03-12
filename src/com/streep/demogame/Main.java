@@ -3,9 +3,10 @@ package com.streep.demogame;
 import com.streep.engine.GUI.Window;
 import com.streep.engine.buildincomponents.controllers.CameraDebugController;
 import com.streep.engine.buildincomponents.lights.DirectionalLight;
-import com.streep.engine.buildincomponents.lights.PointLight;
 import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.buildincomponents.renderers.MeshRenderer;
+import com.streep.engine.buildincomponents.renderers.gui.GuiRenderer;
+import com.streep.engine.buildincomponents.renderers.gui.GuiTexture;
 import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
 import com.streep.engine.core.WindowCode;
@@ -19,6 +20,7 @@ import com.streep.engine.elements.Texture;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.Level;
 import com.streep.engine.systems.LevelManager;
+import com.streep.engine.util.Vector2;
 import com.streep.engine.util.Vector3;
 
 public class Main extends Game {
@@ -33,6 +35,7 @@ public class Main extends Game {
 		GameObject dirLight = new GameObject(0,0,0);
 		dirLight.addComponent(new DirectionalLight());
 		
+		
 		Mesh m = AssetImporter.importOBJ("C:\\Users\\Wessel\\Desktop\\blendermonk.obj");
 		GameObject Triangle = new GameObject();
 		Material material = new Material("./Resources/DefaultAssets/defaultVertex.shader", "./Resources/DefaultAssets/defaultFragment.shader");
@@ -41,9 +44,15 @@ public class Main extends Game {
 		meshrend.mesh = m;
 		meshrend.material = material;
 		Triangle.addComponent(meshrend);
-		PointLight camlight = new PointLight();
-		camlight.intensity = 3f;
-		cam.addComponent(camlight);
+		
+		GameObject gui = new GameObject();
+		GuiRenderer guirend = new GuiRenderer();
+		gui.addComponent(guirend);
+		GuiTexture guiTex = new GuiTexture();
+		guiTex.texture = new Texture("./Resources/DefaultAssets/demoTexture.png");
+		guiTex.position = new Vector2(0.5f, 0.5f);
+		guiTex.scale = new Vector2(0.25f, 0.25f);
+		guirend.addElement(guiTex);
 		
 		//Resource playerspriteResource = new Resource("Sprite-0001.png");
 		//Sprite playersprite = new Sprite(playerspriteResource, 32, 32, 1, 5, 0, 0, 0, 0);
@@ -53,9 +62,10 @@ public class Main extends Game {
 		
 		l.addObject(Triangle);
 		l.addObject(cam);
-		//l.addObject(dirLight);
+		l.addObject(dirLight);
+		l.addObject(gui);
 		
-		Triangle.position = new Vector3(0,0,-8);
+		Triangle.position = new Vector3(0,0,-3);
 		
 		LevelManager.gotoLevel(l);
 		
@@ -69,10 +79,9 @@ public class Main extends Game {
 			
 			@Override
 			public void update() {
-				Triangle.rotation.y = 180;
-				dirLight.rotation.x += 1;
-				dirLight.rotation.y += 1;
-				dirLight.rotation.z += 1;
+				Triangle.rotation.x += 1;
+				Triangle.rotation.y += 1;
+				Triangle.rotation.z += 1;
 			}
 			
 		});

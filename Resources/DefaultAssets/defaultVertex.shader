@@ -14,7 +14,7 @@ uniform mat4 viewMatrix;
 
 void main(void) {
 	gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(position,1.0);
-	pass_position = (transformationMatrix * vec4(position,0.0)).xyz;
 	pass_uv = uv;
 	pass_normal = (transformationMatrix * vec4(normal,0.0)).xyz;
+	pass_position = (transformationMatrix * vec4(position,1.0)).xyz;
 }

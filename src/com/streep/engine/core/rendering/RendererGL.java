@@ -4,6 +4,8 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import com.streep.engine.GUI.GlWindow;
 import com.streep.engine.GUI.Window;
 import com.streep.engine.buildincomponents.lights.Light;
@@ -30,6 +32,8 @@ public class RendererGL extends RendererBase {
 	public void PreRender(Window window) {
 		GlWindow glwin = (GlWindow) window.getWindow();
 		glwin.clear();
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glCullFace(GL11.GL_BACK);
 		if(glfwWindowShouldClose(((GlWindow) window.getWindow()).getWindow())) {
 			Setup.EndLoop = true;
 		}

@@ -21,9 +21,24 @@ public class VMemory {
 	private static List<Integer> vbos = new ArrayList<Integer>();
 	public static HashMap<Integer, Texture> textures = new HashMap<Integer, Texture>();
 	
+	public static RuntimeMesh quad;
+	
 	public static void saveTexture(Texture texture) {
 		texture.load();
 		textures.put(texture.ID, texture);
+	}
+	
+	public static void init() {
+		initStaticModels();
+	}
+	
+	public static void initStaticModels() {
+		int vaoID = createVAO();
+		GL30.glBindVertexArray(vaoID);
+		float[] positions = { -1, 1, -1, -1, 1, 1, 1, -1};
+		storeData(0, 2,positions);
+		GL30.glBindVertexArray(0);
+		quad = new RuntimeMesh(vaoID, positions.length / 2);
 	}
 	
 	public static void cleanUp() {

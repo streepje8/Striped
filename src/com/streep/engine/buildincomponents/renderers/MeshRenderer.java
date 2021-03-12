@@ -53,7 +53,6 @@ public class MeshRenderer extends GlRenderer {
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 
