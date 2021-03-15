@@ -11,6 +11,7 @@ import org.lwjgl.util.vector.Matrix4f;
 
 import com.streep.engine.buildincomponents.lights.Light;
 import com.streep.engine.buildincomponents.renderers.Camera;
+import com.streep.engine.buildincomponents.renderers.gui.fontRendering.TextMaster;
 import com.streep.engine.core.rendering.GlRenderer;
 import com.streep.engine.core.rendering.RendererGL;
 import com.streep.engine.core.rendering.GLRenderer.VMemory;
@@ -43,6 +44,7 @@ public class GuiRenderer extends GlRenderer {
 			GL20.glDisableVertexAttribArray(0);
 			GL30.glBindVertexArray(0);
 			shaderManager.stop();
+			TextMaster.render();
 		}
 	}
 	
@@ -60,7 +62,7 @@ public class GuiRenderer extends GlRenderer {
 		for(GuiElement element : this.elements) {
 			if(element instanceof GuiTexture) {
 				GuiTexture texture = (GuiTexture) element;
-				((GuiTexture) element).texture.load();
+				texture.texture.load();
 			}
 		}
 		this.shaderManager.loadToMemory();

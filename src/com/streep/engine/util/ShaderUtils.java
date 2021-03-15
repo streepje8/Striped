@@ -15,6 +15,7 @@ import com.streep.engine.buildincomponents.lights.Light;
 import com.streep.engine.buildincomponents.lights.PointLight;
 import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.buildincomponents.renderers.gui.GuiShaderManager;
+import com.streep.engine.buildincomponents.renderers.gui.fontRendering.FontShader;
 import com.streep.engine.core.rendering.GLRenderer.MaterialProperty;
 import com.streep.engine.elements.Material;
 import com.streep.engine.elements.Texture;
@@ -227,6 +228,53 @@ public class ShaderUtils {
 					matrixBuffer.flip();
 					GL20.glUniformMatrix4fv(gsm.getUniformLocation("transformationMatrix"), false, matrixBuffer);
 					matrixBuffer = BufferUtils.createFloatBuffer(16);
+					break;
+			}
+		}
+	}
+
+	public static void loadFontShader(FontShader shader) {
+		int textureINT = 1;
+		for(MaterialProperty prop : shader.properties) {
+			switch(prop.type) {
+				case Float:
+					GL20.glUniform1f(shader.getUniformLocation(prop.name), (float) prop.value);
+					break;
+				case Integer:
+					GL20.glUniform1i(shader.getUniformLocation(prop.name), (int) prop.value);
+					break;
+				case sampler1D:
+					GL13.glActiveTexture(GL13.GL_TEXTURE0 + textureINT);
+					GL11.glBindTexture(GL11.GL_TEXTURE_1D, ((Texture) prop.value).ID);
+					textureINT++;
+					break;
+				case sampler2D:
+					GL13.glActiveTexture(GL13.GL_TEXTURE0 + textureINT);
+					GL11.glBindTexture(GL11.GL_TEXTURE_2D,((Texture) prop.value).ID);
+					textureINT++;
+					break;
+				case Vector2:
+					GL20.glUniform2f(shader.getUniformLocation(prop.name),((Vector2) prop.value).x,((Vector2) prop.value).y);
+					break;
+				case Vector3:
+					GL20.glUniform3f(shader.getUniformLocation(prop.name),((Vector3) prop.value).x,((Vector3) prop.value).y,((Vector3) prop.value).z);
+					break;
+				case Boolean:
+					GL20.glUniform1i(shader.getUniformLocation(prop.name), (int) prop.value);
+					break;
+				case Matrix:
+					((Matrix4f) prop.value).store(matrixBuffer);
+					matrixBuffer.flip();
+					GL20.glUniformMatrix4fv(shader.getUniformLocation(prop.name), false, matrixBuffer);
+					matrixBuffer = BufferUtils.createFloatBuffer(16);
+					break;
+				case LightData:
+					System.err.println("Fonts do not support lighting!");
+					System.exit(-1);
+					break;
+				case MatrixData:
+					System.err.println("MatrixData is not allowed for fonts!");
+					System.exit(-1);
 					break;
 			}
 		}

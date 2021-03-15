@@ -105,4 +105,13 @@ public class VMemory {
 		IntBuffer buffer = BufferManager.createIntBuffer(data);
 		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
 	}
+
+	public static int loadTextMeshData(float[] vertexPositions, float[] textureCoords) {
+		int vaoID = createVAO();
+		GL30.glBindVertexArray(vaoID);
+		storeData(0, 2,vertexPositions);
+		storeData(1, 2,textureCoords);
+		GL30.glBindVertexArray(0);
+		return vaoID;
+	}
 }

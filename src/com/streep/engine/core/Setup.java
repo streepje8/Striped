@@ -8,9 +8,11 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import com.streep.engine.GUI.GlWindow;
 import com.streep.engine.GUI.Window;
 import com.streep.engine.buildincomponents.lights.Light;
 import com.streep.engine.buildincomponents.renderers.Camera;
+import com.streep.engine.buildincomponents.renderers.gui.fontRendering.TextMaster;
 import com.streep.engine.core.rendering.GLRenderer.VMemory;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.LevelManager;
@@ -29,6 +31,7 @@ public class Setup {
 	public static void startWindow(Window window, WindowCode c) {
 		c.onStart();
 		VMemory.init();
+		TextMaster.init(((GlWindow) window.getWindow()).getWindow());
 		Game.Input.setMainWindow(window);
 		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			for(Component comp : gameo.getComponents()) {
@@ -78,6 +81,7 @@ public class Setup {
 			}
     	}
 		VMemory.cleanUp();
+		TextMaster.cleanUp();
 	}
 	
 	public static BufferedImage createBuffer(JFrame window) {
