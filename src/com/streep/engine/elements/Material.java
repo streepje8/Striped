@@ -32,6 +32,17 @@ public class Material implements Serializable {
 		fragment
 	}
 	
+	public Material() {
+		this.vertexFile = "./Resources/DefaultAssets/defaultVertex.shader";
+		this.fragmentFile = "./Resources/DefaultAssets/defaultFragment.shader";
+		attributes.put(0, new MaterialAttribute("position",MaterialAttributeType.Posistion));
+		attributes.put(1, new MaterialAttribute("uv",MaterialAttributeType.UV));
+		attributes.put(2, new MaterialAttribute("normal",MaterialAttributeType.Normal));
+		properties.add(new MaterialProperty("matrixData", MaterialPropertyType.MatrixData));
+		properties.add(new MaterialProperty("lightData", MaterialPropertyType.LightData));
+	}
+	
+	
 	public Material(String vertexFile, String fragmentFile) {
 		this.vertexFile = vertexFile;
 		this.fragmentFile = fragmentFile;

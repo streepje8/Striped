@@ -49,7 +49,6 @@ void main(void) {
 		}
 		lightAmount += color * dotLN * intensity;
 	}
-	out_color = vec4(lightAmount,1.0);
 	vec4 lightVector = vec4(0.1) + vec4(lightAmount,1.0); 
-	//out_color = texture(textureSampler, pass_uv) * lightVector;
+	out_color = texture(textureSampler, pass_uv) * lightVector;
 }

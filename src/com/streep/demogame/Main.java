@@ -5,9 +5,6 @@ import com.streep.engine.buildincomponents.controllers.CameraDebugController;
 import com.streep.engine.buildincomponents.lights.DirectionalLight;
 import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.buildincomponents.renderers.MeshRenderer;
-import com.streep.engine.buildincomponents.renderers.gui.GuiRenderer;
-import com.streep.engine.buildincomponents.renderers.gui.GuiText;
-import com.streep.engine.buildincomponents.renderers.gui.GuiTexture;
 import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
 import com.streep.engine.core.WindowCode;
@@ -21,7 +18,6 @@ import com.streep.engine.elements.Texture;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.Level;
 import com.streep.engine.systems.LevelManager;
-import com.streep.engine.util.Vector2;
 import com.streep.engine.util.Vector3;
 
 public class Main extends Game {
@@ -35,43 +31,24 @@ public class Main extends Game {
 		
 		GameObject dirLight = new GameObject(0,0,0);
 		dirLight.addComponent(new DirectionalLight());
+		dirLight.rotation = new Vector3(25,25,25);
 		
 		
-		Mesh m = AssetImporter.importOBJ("C:\\Users\\Wessel\\Desktop\\blendermonk.obj");
-		GameObject Triangle = new GameObject();
-		Material material = new Material("./Resources/DefaultAssets/defaultVertex.shader", "./Resources/DefaultAssets/defaultFragment.shader");
+		Mesh m = AssetImporter.importOBJ("C:\\Users\\Wessel\\Desktop\\DemoModel.obj");
+		GameObject DemoObject = new GameObject(0,0,-4);
+		Material material = new Material();
 		material.properties.add(new MaterialProperty("textureSampler", MaterialPropertyType.sampler2D, new Texture("./Resources/DefaultAssets/demoTexture.png"))); //C:\\Users\\Wessel\\Desktop\\stallTexture.png
 		MeshRenderer meshrend = new MeshRenderer();
 		meshrend.mesh = m;
 		meshrend.material = material;
-		Triangle.addComponent(meshrend);
-		
-		GameObject gui = new GameObject();
-		GuiRenderer guirend = new GuiRenderer();
-		gui.addComponent(guirend);
-		GuiTexture guiTex = new GuiTexture();
-		guiTex.texture = new Texture("./Resources/DefaultAssets/demoTexture.png");
-		guiTex.position = new Vector2(0.5f, 0.5f);
-		guiTex.scale = new Vector2(0.25f, 0.25f);
-		GuiText text = new GuiText();
-		text.text = "YES IT WORKS!";
-		text.position = new Vector2(0.5f, 0.5f);
-		text.scale = new Vector2(3f, 1f);
-		guirend.addElement(guiTex);
-		guirend.addElement(text);
-		
-		//Resource playerspriteResource = new Resource("Sprite-0001.png");
-		//Sprite playersprite = new Sprite(playerspriteResource, 32, 32, 1, 5, 0, 0, 0, 0);
+		DemoObject.addComponent(meshrend);
 		
 		//Create and open the level
 		Level l = new Level("LevelOne");
 		
-		l.addObject(Triangle);
+		l.addObject(DemoObject);
 		l.addObject(cam);
 		l.addObject(dirLight);
-		l.addObject(gui);
-		
-		Triangle.position = new Vector3(0,0,-3);
 		
 		LevelManager.gotoLevel(l);
 		
@@ -83,17 +60,9 @@ public class Main extends Game {
 				
 			}
 			
-			int i = 0;
-			
 			@Override
 			public void update() {
-				Triangle.rotation.x += 1;
-				Triangle.rotation.y += 1;
-				Triangle.rotation.z += 1;
-				text.text = "The number is>> " + i;
-				text.color = new Vector3(i / 1000f,i / 1000f,i / 1000f);
-				text.updateText();
-				i++;
+				DemoObject.rotation.y += 1;
 			}
 			
 		});
