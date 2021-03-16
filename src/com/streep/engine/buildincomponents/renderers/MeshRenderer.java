@@ -30,7 +30,7 @@ public class MeshRenderer extends GlRenderer {
 		for(int i = 0; i < this.material.attributes.size(); i++) {
 			GL20.glEnableVertexAttribArray(i);
 		}
-		ShaderUtils.loadProperties(c, this.material, lightList, this.gameObject,((GlWindow) renderer.getWindow().getWindow()).getWindow());
+		ShaderUtils.loadProperties(c, this.material, lightList, this.gameObject,((GlWindow) renderer.getWindow().getWindow()));
 		GL11.glDrawElements(GL11.GL_TRIANGLES, runtimeMesh.getVertices(), GL11.GL_UNSIGNED_INT, 0);
 		for(int i = 0; i < this.material.attributes.size(); i++) {
 			GL20.glDisableVertexAttribArray(i);

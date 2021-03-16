@@ -12,6 +12,7 @@ import com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator.FontTyp
 import com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator.GUIText;
 import com.streep.engine.core.rendering.GLRenderer.MaterialProperty;
 import com.streep.engine.util.ShaderUtils;
+import com.streep.engine.util.Vector3;
 
 public class FontRenderer {
 
@@ -19,6 +20,10 @@ public class FontRenderer {
 
 	public FontRenderer() {
 		shader = new FontShader();
+	}
+	
+	public void onStart() {
+		shader.loadToMemory();
 	}
 	
 	public void render(Map<FontType, List<GUIText>> texts){
@@ -50,7 +55,7 @@ public class FontRenderer {
 		GL20.glEnableVertexAttribArray(1);
 		for(MaterialProperty prop : shader.properties) {
 			if(prop.name == "colour") {
-				prop.value = text.getColour();
+				prop.value = text.getColour(); //text.getColour()
 			}
 			if(prop.name == "translation") {
 				prop.value = text.getPosition();

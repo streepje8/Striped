@@ -17,6 +17,7 @@ import com.streep.engine.core.rendering.GLRenderer.VMemory;
 import com.streep.engine.systems.GameObject;
 import com.streep.engine.systems.LevelManager;
 import com.streep.engine.util.Time;
+import com.streep.engine.util.Vector2;
 
 public class Setup {
 	
@@ -30,8 +31,10 @@ public class Setup {
 	
 	public static void startWindow(Window window, WindowCode c) {
 		c.onStart();
-		VMemory.init();
-		TextMaster.init(((GlWindow) window.getWindow()).getWindow());
+		if(window.getWindow() instanceof GlWindow) {
+			VMemory.init();
+			TextMaster.init(window);
+		}
 		Game.Input.setMainWindow(window);
 		for(GameObject gameo : LevelManager.currentLevel.objects) {
 			for(Component comp : gameo.getComponents()) {

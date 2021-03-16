@@ -25,7 +25,7 @@ public class ShaderUtils {
 
 	private static FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 	
-	public static void loadProperties(Camera c, Material mat, List<Light> lightList, GameObject forObject, long Window) {
+	public static void loadProperties(Camera c, Material mat, List<Light> lightList, GameObject forObject, GlWindow Window) {
 		int textureINT = 0;
 		for(MaterialProperty prop : mat.properties) {
 			switch(prop.type) {
@@ -115,7 +115,7 @@ public class ShaderUtils {
 				case MatrixData:
 					//Generate matrix data
 					Matrix4f transform = SMath.createTransformationMatrix(forObject.position,forObject.rotation, forObject.scale);
-					Matrix4f projection = c.getProjectionMatrix(GlWindow.getSize(Window));
+					Matrix4f projection = c.getProjectionMatrix(Window.getSize());
 					Matrix4f view = c.getViewMatrix();
 					
 					//Give it to the shader

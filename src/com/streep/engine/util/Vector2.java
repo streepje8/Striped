@@ -12,6 +12,10 @@ public class Vector2 {
 		this.y = y;
 	}
 	
+	public String toString() {
+		return "[" + this.x + "," + this.y + "]";
+	}
+	
 	public Vector2 normalize() {
 		return new Vector2(this.x / magnitude(), this.y / magnitude());
 	}

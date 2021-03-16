@@ -6,6 +6,7 @@ import com.streep.engine.buildincomponents.lights.DirectionalLight;
 import com.streep.engine.buildincomponents.renderers.Camera;
 import com.streep.engine.buildincomponents.renderers.MeshRenderer;
 import com.streep.engine.buildincomponents.renderers.gui.GuiRenderer;
+import com.streep.engine.buildincomponents.renderers.gui.GuiText;
 import com.streep.engine.buildincomponents.renderers.gui.GuiTexture;
 import com.streep.engine.core.Game;
 import com.streep.engine.core.Setup;
@@ -52,7 +53,12 @@ public class Main extends Game {
 		guiTex.texture = new Texture("./Resources/DefaultAssets/demoTexture.png");
 		guiTex.position = new Vector2(0.5f, 0.5f);
 		guiTex.scale = new Vector2(0.25f, 0.25f);
+		GuiText text = new GuiText();
+		text.text = "YES IT WORKS!";
+		text.position = new Vector2(0.5f, 0.5f);
+		text.scale = new Vector2(3f, 1f);
 		guirend.addElement(guiTex);
+		guirend.addElement(text);
 		
 		//Resource playerspriteResource = new Resource("Sprite-0001.png");
 		//Sprite playersprite = new Sprite(playerspriteResource, 32, 32, 1, 5, 0, 0, 0, 0);
@@ -77,11 +83,17 @@ public class Main extends Game {
 				
 			}
 			
+			int i = 0;
+			
 			@Override
 			public void update() {
 				Triangle.rotation.x += 1;
 				Triangle.rotation.y += 1;
 				Triangle.rotation.z += 1;
+				text.text = "The number is>> " + i;
+				text.color = new Vector3(i / 1000f,i / 1000f,i / 1000f);
+				text.updateText();
+				i++;
 			}
 			
 		});

@@ -6,9 +6,11 @@ public class Window {
 	
 	private BasisWindow window;
 	public RendererBase renderer;
+	public static float aspectRatio;
 	
 	public Window(int width, int height,String title ,RendererBase renderer) {
 		this.renderer = renderer;
+		aspectRatio = width / height;
 		this.window = new GlWindow(width, height, title);
 	}
 	

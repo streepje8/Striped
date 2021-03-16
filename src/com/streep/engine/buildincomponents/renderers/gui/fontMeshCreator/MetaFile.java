@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.streep.engine.GUI.GlWindow;
+import com.streep.engine.GUI.Window;
 import com.streep.engine.buildincomponents.renderers.gui.fontRendering.TextMaster;
 import com.streep.engine.util.Vector2;
 
@@ -50,8 +51,12 @@ public class MetaFile {
 	 *            - the font file.
 	 */
 	protected MetaFile(File file) {
-		Vector2 windowSize = GlWindow.getSize(TextMaster.window);
-		this.aspectRatio = windowSize.x / windowSize.y;
+		if(TextMaster.window == null) {
+			this.aspectRatio = Window.aspectRatio;
+		} else {
+			Vector2 windowSize = ((GlWindow) TextMaster.window.getWindow()).getSize(); //FIX THIS PLEZ
+			this.aspectRatio = windowSize.x / windowSize.y;
+		}
 		openFile(file);
 		loadPaddingData();
 		loadLineSizes();
@@ -60,7 +65,7 @@ public class MetaFile {
 		close();
 	}
 
-	protected double getSpaceWidth() {
+	protected double getSpaceWidth() {;
 		return spaceWidth;
 	}
 
@@ -101,7 +106,10 @@ public class MetaFile {
 	 * @return The value of the variable.
 	 */
 	private int getValueOfVariable(String variable) {
-		return Integer.parseInt(values.get(variable));
+		if(values.containsKey(variable)) {
+			return Integer.parseInt(values.get(variable));
+		}
+		return 0;
 	}
 
 	/**

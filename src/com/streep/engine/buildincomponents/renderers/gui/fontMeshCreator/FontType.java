@@ -2,6 +2,8 @@ package com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator;
 
 import java.io.File;
 
+import com.streep.engine.elements.Texture;
+
 /**
  * Represents a font. It holds the font's texture atlas as well as having the
  * ability to create the quad vertices for any text using this font.
@@ -24,8 +26,9 @@ public class FontType {
 	 *            - the font file containing information about each character in
 	 *            the texture atlas.
 	 */
-	public FontType(int textureAtlas, File fontFile) {
-		this.textureAtlas = textureAtlas;
+	public FontType(Texture textureAtlas, File fontFile) {
+		textureAtlas.load();
+		this.textureAtlas = textureAtlas.ID;
 		this.loader = new TextMeshCreator(fontFile);
 	}
 

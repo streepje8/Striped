@@ -64,6 +64,10 @@ public class GuiRenderer extends GlRenderer {
 				GuiTexture texture = (GuiTexture) element;
 				texture.texture.load();
 			}
+			if(element instanceof GuiText) {
+				GuiText text = (GuiText) element;
+				text.updateText();
+			}
 		}
 		this.shaderManager.loadToMemory();
 	}

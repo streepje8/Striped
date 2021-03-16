@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.lwjgl.opengl.GL30;
 
+import com.streep.engine.GUI.Window;
 import com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator.FontType;
 import com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator.GUIText;
 import com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator.TextMeshData;
@@ -16,10 +17,11 @@ public class TextMaster {
 	
 	private static Map<FontType, List<GUIText>> texts = new HashMap<FontType, List<GUIText>>();
 	private static FontRenderer renderer;
-	public static long window = 0;
+	public static Window window;
 	
-	public static void init(long game_window){
+	public static void init(Window game_window){
 		renderer = new FontRenderer();
+		renderer.onStart();
 		window = game_window;
 	}
 	

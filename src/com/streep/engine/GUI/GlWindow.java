@@ -91,15 +91,17 @@ public class GlWindow extends BasisWindow {
 		glClearColor(Setup.clearColor.getRed(), Setup.clearColor.getGreen(), Setup.clearColor.getBlue(), 0.0f);
 	}
 	
-	public static Vector2 getSize(long window) {
+	public Vector2 getSize() {
 		try (MemoryStack stack = stackPush()) {
 			IntBuffer pWidth = stack.mallocInt(1); // int*
 			IntBuffer pHeight = stack.mallocInt(1); // int*
-			glfwGetWindowSize(window, pWidth, pHeight);
+			glfwGetWindowSize(this.window, pWidth, pHeight);
 			GL11.glViewport(0, 0, pWidth.get(0), pHeight.get(0));
 			return new Vector2(pWidth.get(0), pHeight.get(0));
 		} catch(Exception e) {
-			return new Vector2(0,0);
+			e.printStackTrace();
+			System.out.println("Error occured, returning window size unchecked, this might break stuff");
+			return new Vector2(this.width, this.height);
 		}
 	}
 	

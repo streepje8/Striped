@@ -34,7 +34,6 @@ public class FontShader {
 		attributes.put(1, new MaterialAttribute("uv",MaterialAttributeType.UV));
 		properties.add(new MaterialProperty("translation", MaterialPropertyType.Vector2));
 		properties.add(new MaterialProperty("colour", MaterialPropertyType.Vector3));
-		properties.add(new MaterialProperty("fontAtlas", MaterialPropertyType.sampler2D));
 	}
 	
 	public void loadToMemory() {

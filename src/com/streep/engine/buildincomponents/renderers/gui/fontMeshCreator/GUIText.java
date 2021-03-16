@@ -1,5 +1,6 @@
 package com.streep.engine.buildincomponents.renderers.gui.fontMeshCreator;
 
+import com.streep.engine.buildincomponents.renderers.gui.GuiText;
 import com.streep.engine.buildincomponents.renderers.gui.fontRendering.TextMaster;
 import com.streep.engine.util.Vector2;
 import com.streep.engine.util.Vector3;
@@ -60,7 +61,17 @@ public class GUIText {
 		this.position = position;
 		this.lineMaxSize = maxLineLength;
 		this.centerText = centered;
-		TextMaster.loadText(this);;
+		TextMaster.loadText(this);
+	}
+	
+	public GUIText(GuiText text) {
+		this.textString = text.text;
+		this.fontSize = text.scale.x;
+		this.font = text.font;
+		this.position = text.position;
+		this.lineMaxSize = text.maxLineLength;
+		this.centerText = text.centered;
+		TextMaster.loadText(this);
 	}
 
 	/**
