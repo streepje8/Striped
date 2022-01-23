@@ -34,7 +34,7 @@ public class Main extends Game {
 		dirLight.rotation = new Vector3(25,25,25);
 		
 		
-		Mesh m = AssetImporter.importOBJ("C:\\Users\\Wessel\\Desktop\\DemoModel.obj");
+		Mesh m = AssetImporter.importOBJ("./DemoModel.obj");
 		GameObject DemoObject = new GameObject(0,0,-4);
 		Material material = new Material();
 		material.properties.add(new MaterialProperty("textureSampler", MaterialPropertyType.sampler2D, new Texture("./Resources/DefaultAssets/demoTexture.png"))); //C:\\Users\\Wessel\\Desktop\\stallTexture.png
