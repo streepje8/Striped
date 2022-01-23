@@ -37,7 +37,7 @@ public class Main extends Game {
 		Mesh m = AssetImporter.importOBJ("./DemoModel.obj");
 		GameObject DemoObject = new GameObject(0,0,-4);
 		Material material = new Material();
-		material.properties.add(new MaterialProperty("textureSampler", MaterialPropertyType.sampler2D, new Texture("./Resources/DefaultAssets/demoTexture.png"))); //C:\\Users\\Wessel\\Desktop\\stallTexture.png
+		material.properties.add(new MaterialProperty("textureSampler", MaterialPropertyType.sampler2D, new Texture("./Resources/DefaultAssets/demoTexture.png")));
 		MeshRenderer meshrend = new MeshRenderer();
 		meshrend.mesh = m;
 		meshrend.material = material;
